@@ -1,0 +1,56 @@
+@using organProject.Models;
+@model MatchWrap;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potential matches</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Potential Matches for @Model.ThisDonor.FirstName</h1>
+           <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patinet Name</th>
+                        <th>DOB</th>
+                        <th>Blood Type</th>
+                        <th>Location</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Recipient d in @Model.Potential)
+                    {
+                        <tr>
+                            <td>@d.RecipientID</td>
+                            <td>@d.LastName, @d.FirstName</td>
+                            <td>@d.DOB.ToShortDateString()</td>
+                            <td>@if(d.BloodType == 'C')
+                                {
+                                    <span>AB</span>
+                                }
+                                else
+                                {
+                                    @d.BloodType
+                                }
+                            @if(d.Rh == true)
+                            {
+                                <span>Positive</span>
+                            }
+                            else
+                            {
+                                <span>Negative</span>
+                            }
+                            </td>
+                            <td>@d.CurrentCenter.CenterName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</body>
+</html>

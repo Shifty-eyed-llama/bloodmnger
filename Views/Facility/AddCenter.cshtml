@@ -1,0 +1,20 @@
+@using organProject.Models;
+@model Center;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Center</title>
+</head>
+<body>
+    <div class="container">
+        <form asp-action="/add/center" method="post">
+            <label asp-for="CenterName"></label>
+            <input asp-for="CenterName">
+            <button type="submit">Add Center</button>
+        </form>
+    </div>
+</body>
+</html>

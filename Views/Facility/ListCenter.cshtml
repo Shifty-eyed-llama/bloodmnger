@@ -1,0 +1,19 @@
+@using organProject.Models;
+@model NewPatientWrap;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Center</title>
+</head>
+<body>
+    <ul>
+        @foreach(Center c in @Model.AllCenter)
+        {
+            <li>@c.CenterName</li>
+        }
+    </ul>
+</body>
+</html>

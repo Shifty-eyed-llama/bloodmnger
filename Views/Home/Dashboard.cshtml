@@ -1,0 +1,80 @@
+@using organProject.Models;
+@model DashWrapper;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome @Model.ThisUser.FirstName</h1>
+        <div class="table">
+            <h3>The Current List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Donor Name</th>
+                        <th>DOB</th>
+                        <th>Blood Type</th>
+                        <th>Registered</th>
+                        <th>Family Consent</th>
+                        <th>Find Matches</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Donor d in @Model.AllDonors)
+                    {
+                        <tr>
+                            <td>@d.DonorID</td>
+                            <td>@d.LastName, @d.FirstName</td>
+                            <td>@d.DOB.ToShortDateString()</td>
+                            <td>@if(d.BloodType == 'C')
+                                {
+                                    <span>AB</span>
+                                }
+                                else
+                                {
+                                    @d.BloodType
+                                }
+                            @if(d.Rh == true)
+                            {
+                                <span>Positive</span>
+                            }
+                            else
+                            {
+                                <span>Negative</span>
+                            }
+                            </td>
+                            <td>@if(d.Registered == true)
+                                {
+                                    <span>Registered</span>
+                                }
+                                else
+                                {
+                                    <span>NOT Registered</span>
+                                }
+                            </td>
+                            <td>@if(d.Consent == true)
+                                {
+                                    <span>Consented</span>
+                                }
+                                else
+                                {
+                                    <span>NOT Concented</span>
+                                }
+                            </td>
+                            <td><button onclick="window.location.href='/find/matches/@d.DonorID'">Find Matches</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <button onclick="window.location.href='/add/donor'">Add Donor</button>
+    </div>
+</body>
+</html>

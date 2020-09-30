@@ -1,0 +1,60 @@
+@using organProject.Models;
+@model NewPatientWrap;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+</head>
+<body>
+    <div class="">
+        <h1>Add Patient Here</h1>
+        <div class="form">
+            <form asp-action="/facility/add/patient" method="post">
+                <span asp-validation-for="@Model.NewRecipient.FirstName"></span>
+                <br>
+                <label asp-for="@Model.NewRecipient.FirstName"></label>
+                <input asp-for="@Model.NewRecipient.FirstName">
+                <br>
+                <span asp-validation-for="@Model.NewRecipient.LastName"></span>
+                <br>
+                <label asp-for="@Model.NewRecipient.LastName"></label>
+                <input asp-for="@Model.NewRecipient.LastName">
+                <br>
+                <span asp-validation-for="@Model.NewRecipient.DOB"></span>
+                <br>
+                <label asp-for="@Model.NewRecipient.DOB"></label>
+                <input asp-for="@Model.NewRecipient.DOB">
+                <br>
+                <span asp-validation-for="@Model.NewRecipient.BloodType"></span>
+                <br>
+                <label asp-for="@Model.NewRecipient.BloodType"></label>
+                <select asp-for="@Model.NewRecipient.BloodType" >
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">AB</option>
+                    <option value="O">O</option>
+                </select>
+                <input asp-for="@Model.NewRecipient.BloodType">
+                <br>
+                <span asp-validation-for="@Model.NewRecipient.Rh"></span>
+                <br>
+                <label asp-for="@Model.NewRecipient.Rh"></label>
+                <input asp-for="@Model.NewRecipient.Rh">
+                <br>
+                <label asp-for="@Model.NewRecipient.CenterID"></label>
+                <select asp-for="@Model.NewRecipient.CenterID">
+                    @foreach(Center c in @Model.AllCenter)
+                    {
+                        <option value="@c.CenterID">@c.CenterName</option>
+                    }
+                </select>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

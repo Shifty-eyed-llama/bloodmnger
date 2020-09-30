@@ -1,0 +1,76 @@
+@using organProject.Models;
+@model FacilityDashWrapper;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome @Model.ThisUser.FirstName</h1>
+        <div class="table">
+
+@foreach(Center c in @Model.AllCenter)
+{
+    <h2>@c.CenterName</h2>
+            <h3>The Current Patient List</h3>
+
+            @* <ul>
+                @foreach(Center c in @Model.)
+            </ul> *@
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patinet Name</th>
+                        <th>DOB</th>
+                        <th>Blood Type</th>
+                        <th>Location</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @foreach(Recipient d in @Model.AllRecipient) *@
+
+                @foreach(Recipient d in c.Recipients)
+
+                    {
+                        <tr>
+                            <td>@d.RecipientID</td>
+                            <td>@d.LastName, @d.FirstName</td>
+                            <td>@d.DOB.ToShortDateString()</td>
+                            <td>@if(d.BloodType == 'C')
+                                {
+                                    <span>AB</span>
+                                }
+                                else
+                                {
+                                    @d.BloodType
+                                }
+                            @if(d.Rh == true)
+                            {
+                                <span>Positive</span>
+                            }
+                            else
+                            {
+                                <span>Negative</span>
+                            }
+                            </td>
+                            @* <td>@d.HospitalID</td> *@
+                            <td>@d.CurrentCenter.CenterName</td>
+                            <td><a href="/facility/delete/patient/@d.RecipientID">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+}
+
+        </div>
+        <button onclick="window.location.href='/facility/add/patient'">Add patient</button>
+    </div>
+</body>
+</html>
